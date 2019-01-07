@@ -8,7 +8,19 @@ $ composer require germania-kg/configreader
 
 ## Usage
 
-TBD.
+The **YamlConfigReader** internally uses *array_replace_recursive*. If the given config files do not exist, nothing happens. The return value is an array in any case.
+
+```php
+<?php
+use Germania\ConfigReader\YamlConfigReader;
+
+$reader = new YamlConfigReader( "/path/to/configs");
+
+// Returns array
+$config = $reader("defaults.yaml", "optionals.yaml");
+```
+
+
 
 
 
