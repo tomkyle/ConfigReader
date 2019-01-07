@@ -1,0 +1,9 @@
+# Configuration base
+
+a_string: bar
+
+an_array:
+    - one
+    - two
+    - three
+
