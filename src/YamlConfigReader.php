@@ -36,9 +36,13 @@ class YamlConfigReader
         }, $files);
 
         // Glue arrays, if needed
-        return count($values) > 1
-        ? array_replace_recursive( ...$values )
-        : $values;
+        if (empty($values)):
+            return array();
+        elseif (count($values) === 1):
+            return array_replace_recursive( $values, array());
+        else:
+            return array_replace_recursive( ...$values );
+        endif;
     }
 
 
