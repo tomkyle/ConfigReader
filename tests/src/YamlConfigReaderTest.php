@@ -5,6 +5,14 @@ use Germania\ConfigReader\YamlConfigReader;
 
 class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 {
+    public $basedir;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->basedir = join(DIRECTORY_SEPARATOR, [ dirname(__DIR__), "mock"]);
+    }
+
 
     public function testInstantiationWithoutCtorArgument( )
     {
@@ -17,18 +25,23 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    public function testInstantiationAndWorking( )
+    public function testInstantiationAndOnlyOneFile( )
     {
-        // The "mock" config files
-        $mockdir = join(DIRECTORY_SEPARATOR, [ dirname(__DIR__), "mock"]);
-        $files = array(
-            "config_base.yaml",
-            "config_override.yaml"
-        );
+        $sut = new YamlConfigReader( $this->basedir );
+        $result = $sut( "config_base.yaml" );
 
-        // Let ConfigReader do its work
-        $sut = new YamlConfigReader( $mockdir );
-        $result = $sut( ...$files );
+        // Assumptions
+        $this->assertInternalType("array",   $result);
+        $this->assertArrayHasKey("a_string", $result);
+        $this->assertArrayHasKey("an_array", $result);
+        $this->assertEquals("bar",   $result['a_string']);
+    }
+
+
+    public function testInstantiationAndOverddingFiles( )
+    {
+        $sut = new YamlConfigReader( $this->basedir );
+        $result = $sut( "config_base.yaml", "config_override.yaml" );
 
         // Assumptions
         $this->assertInternalType("array",   $result);
@@ -43,8 +56,12 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 
     protected function createFilenameThatNotExists()
     {
-        $tmpfname = tempnam(sys_get_temp_dir(), 'FOO'); // good
+        // Create temp file with name that does not exist
+        // and delete at once………
+        $tmpfname = tempnam(sys_get_temp_dir(), 'FOO');
         unlink( $tmpfname );
+
+        // Return that very file name that does not exist
         return $tmpfname;
     }
 }

@@ -1,7 +1,9 @@
 # Configuration base
 
+# This string should not be altered
 a_string: bar
 
+# This array should be overriden in "config_override"
 an_array:
     - one
     - two
