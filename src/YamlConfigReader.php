@@ -39,7 +39,7 @@ class YamlConfigReader
         if (empty($values)):
             return array();
         elseif (count($values) === 1):
-            return array_replace_recursive( $values, array());
+            return $values[0];
         else:
             return array_replace_recursive( ...$values );
         endif;
