@@ -1,0 +1,11 @@
+# Configuration override
+
+# Override array
+an_array:
+    - four
+    - five
+
+# Add custom value
+
+custom: value
+

@@ -35,8 +35,10 @@ class YamlConfigReader
             return (array) Yaml::parseFile( $file );
         }, $files);
 
-        // Glue arrays
-        return array_replace_recursive( ...$values );
+        // Glue arrays, if needed
+        return count($values) > 1
+        ? array_replace_recursive( ...$values )
+        : $values;
     }
 
 
