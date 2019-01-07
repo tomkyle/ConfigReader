@@ -18,5 +18,8 @@ TBD.
 $ git clone https://github.com/GermaniaKG/ConfigReader.git configreader
 $ cd configreader
 $ composer install
+
+# Run PhpUnit
+$ composer test
 ```
 
