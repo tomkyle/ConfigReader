@@ -1,11 +1,11 @@
 # Configuration override
 
-# Override array
+# Override array from "config_base"
 an_array:
     - four
     - five
 
-# Add custom value
 
+# Add custom value which does not exists in "config_base"
 custom: value
 
