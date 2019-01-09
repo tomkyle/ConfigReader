@@ -22,6 +22,22 @@ $config = $reader("defaults.yaml", "optionals.yaml");
 
 
 
+## Exceptions
+
+When *YamlConfigReader* stumbles upon a *Symfony\Component\Yaml\Exception\ParseException*, it will catch it and wrap it in a **Germania\ConfigReader\ParseException**. This class implements **ConfigReaderExceptionInterface** you can watch out for:
+
+```php
+use Germania\ConfigReader\ConfigReaderExceptionInterface;
+try {
+	$config = $reader("defaults.yaml", "optionals.yaml");  
+}
+catch (ConfigReaderExceptionInterface $e)
+{
+  echo $e->getMessage();
+}
+
+```
+
 
 
 ## Development

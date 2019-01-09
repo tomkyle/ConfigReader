@@ -2,6 +2,7 @@
 namespace Germania\ConfigReader;
 
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Yaml\Exception\ParseException as SymfonyYamlParseException;
 
 class YamlConfigReader
 {
@@ -31,17 +32,23 @@ class YamlConfigReader
         $files = $this->prepareFiles( $files );
 
         // Parse each file
-        $values = array_map(function($file) {
-            return (array) Yaml::parseFile( $file );
+        $per_file_values = array_map(function($file) {
+            try {
+                return (array) Yaml::parseFile( $file );
+            }
+            catch(SymfonyYamlParseException $e) {
+                $msg = sprintf("Could not parse '%s': %s", $file, $e->getMessage());
+                throw new ParseException( $msg, 0, $e );
+            }
         }, $files);
 
         // Glue arrays, if needed
-        if (empty($values)):
+        if (empty($per_file_values)):
             return array();
-        elseif (count($values) === 1):
-            return $values[0];
+        elseif (count($per_file_values) === 1):
+            return $per_file_values[0];
         else:
-            return array_replace_recursive( ...$values );
+            return array_replace_recursive( ...$per_file_values );
         endif;
     }
 
