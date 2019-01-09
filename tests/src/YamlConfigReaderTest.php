@@ -2,6 +2,7 @@
 namespace tests;
 
 use Germania\ConfigReader\YamlConfigReader;
+use Germania\ConfigReader\ParseException;
 
 class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 {
@@ -22,6 +23,15 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 
         $result = $sut( $no_file );
         $this->assertInternalType("array", $result);
+    }
+
+
+    public function testParseExceptionOnDoubleKey( )
+    {
+        $sut = new YamlConfigReader( $this->basedir );
+
+        $this->expectException( ParseException::class );
+        $sut( "err_doublekey.yaml" );
     }
 
 
