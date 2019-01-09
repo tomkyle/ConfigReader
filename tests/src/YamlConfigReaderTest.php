@@ -3,6 +3,7 @@ namespace tests;
 
 use Germania\ConfigReader\YamlConfigReader;
 use Germania\ConfigReader\ParseException;
+use Germania\ConfigReader\ConfigReaderExceptionInterface;
 
 class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 {
@@ -31,6 +32,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $sut = new YamlConfigReader( $this->basedir );
 
         $this->expectException( ParseException::class );
+        $this->expectException( ConfigReaderExceptionInterface::class );
         $sut( "err_doublekey.yaml" );
     }
 
