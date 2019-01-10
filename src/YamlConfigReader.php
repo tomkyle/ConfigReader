@@ -13,6 +13,11 @@ class YamlConfigReader
      */
     public $base_dir;
 
+    /**
+     * @var string|null
+     */
+    public $ignore_key = null;
+
 
     /**
      * @param string $base_dir The config file directory, default: current work dir
@@ -20,6 +25,15 @@ class YamlConfigReader
     public function __construct( $base_dir = null)
     {
         $this->base_dir = $base_dir;
+    }
+
+    /**
+     * @param string|null|false $key "Ignore" key, FALSE or NULL to reset
+     */
+    public function setIgnoreKey( $key = null)
+    {
+        $this->ignore_key = $key;
+        return $this;
     }
 
 
@@ -34,7 +48,8 @@ class YamlConfigReader
         // Parse each file
         $per_file_values = array_map(function($file) {
             try {
-                return (array) Yaml::parseFile( $file );
+                $result = (array) Yaml::parseFile( $file );
+                return $this->removeIgnoreKey($this->ignore_key, $result);
             }
             catch(SymfonyYamlParseException $e) {
                 $msg = sprintf("Could not parse '%s': %s", $file, $e->getMessage());
@@ -50,6 +65,20 @@ class YamlConfigReader
         else:
             return array_replace_recursive( ...$per_file_values );
         endif;
+    }
+
+
+
+    protected function removeIgnoreKey( $key, $result)
+    {
+        if (!$key
+        or !array_key_exists($key, $result))
+            return $result;
+
+        $to_delete = (array) $result[ $key ];
+        $to_delete[] = $key;
+        $to_delete = array_flip(array_filter($to_delete));
+        return array_diff_key( $result, $to_delete);
     }
 
 

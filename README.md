@@ -20,6 +20,42 @@ $reader = new YamlConfigReader( "/path/to/configs");
 $config = $reader("defaults.yaml", "optionals.yaml");
 ```
 
+### Excluding results
+
+Given a YAML map like this:
+
+```yaml
+# ignoring.yaml
+
+# Exclude a single item:
+_ignore: foo
+# ... or even multiple items:
+_ignore: 
+  - foo
+  - qux
+  
+foo:  bar
+qux:  baz
+name: john
+```
+
+To exclude a certain elements, use **setIgnoreKey** to set the name of a YAML map item *that contains the keys to exclude.* The result in our example will not contain neither `foo`nor `_ignore`. Be careful to not overuse this feature!
+
+```php
+$reader = new YamlConfigReader( "/path/to/configs");
+$reader->setIgnoreKey( "_ignore" );
+$config = $reader("ignoring");
+
+# Will both be FALSE:
+isset( $config["_ignore"])
+isset( $config["foo"])
+
+# Reset again
+$reader->setIgnoreKey( null );
+```
+
+
+
 
 
 ## Exceptions
