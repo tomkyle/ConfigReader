@@ -48,8 +48,7 @@ class YamlConfigReader
         // Parse each file
         $per_file_values = array_map(function($file) {
             try {
-                $result = (array) Yaml::parseFile( $file );
-                return $this->removeIgnoreKey($this->ignore_key, $result);
+                return (array) Yaml::parseFile( $file );
             }
             catch(SymfonyYamlParseException $e) {
                 $msg = sprintf("Could not parse '%s': %s", $file, $e->getMessage());
@@ -61,10 +60,13 @@ class YamlConfigReader
         if (empty($per_file_values)):
             return array();
         elseif (count($per_file_values) === 1):
-            return $per_file_values[0];
+            $result = $per_file_values[0];
         else:
-            return array_replace_recursive( ...$per_file_values );
+            $result = array_replace_recursive( ...$per_file_values );
         endif;
+
+        // Handle "ignore keys"
+        return $this->removeIgnoreKey($this->ignore_key, $result);
     }
 
 
