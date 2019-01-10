@@ -37,6 +37,35 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     }
 
 
+    /**
+     * @dataProvider provideIgnoreKeys
+     */
+    public function testIgnoreKey( $ignore_key, $excluded_keys)
+    {
+        $sut = new YamlConfigReader( $this->basedir );
+
+        $result1 = $sut( "ignore.yaml" );
+        $this->assertArrayHasKey($ignore_key, $result1);
+
+        // set ignore key
+        $sut->setIgnoreKey( $ignore_key );
+        $result2 = $sut( "ignore.yaml" );
+        foreach($excluded_keys as $ik):
+            $this->assertFalse( array_key_exists($ik, $result2));
+        endforeach;
+        $this->assertFalse( array_key_exists($ignore_key, $result2));
+    }
+
+    public function provideIgnoreKeys()
+    {
+        return [
+            [ "_ignore", array( "foo" ) ],
+            [ "_ignoreMultipleKeys", array( "foo", "qux" ) ]
+        ];
+    }
+
+
+
     public function testInstantiationAndOnlyOneFile( )
     {
         $sut = new YamlConfigReader( $this->basedir );

@@ -1,0 +1,12 @@
+
+# Keys to ignore after parsing
+_ignore: foo
+
+_ignoreMultipleKeys:
+    - foo
+    - qux
+
+foo:  bar
+qux:  baz
+name: john
+
