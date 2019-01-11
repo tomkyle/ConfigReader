@@ -4,6 +4,7 @@ namespace tests;
 use Germania\ConfigReader\YamlConfigReader;
 use Germania\ConfigReader\ParseException;
 use Germania\ConfigReader\ConfigReaderExceptionInterface;
+use Symfony\Component\Yaml\Yaml;
 
 class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 {
@@ -56,6 +57,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse( array_key_exists($ignore_key, $result2));
     }
 
+
     public function provideIgnoreKeys()
     {
         return [
@@ -64,6 +66,18 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+
+
+    public function testYamlParsingOptions( )
+    {
+        $sut = new YamlConfigReader( $this->basedir );
+        $sut->setYamlFlags( Yaml::PARSE_DATETIME );
+        $result = $sut( "options.yaml" );
+
+        // Assumptions
+        $this->assertInstanceOf ( \DateTime::class,   $result['foo']);
+        $this->assertInstanceOf ( \DateTime::class,   $result['bar']);
+    }
 
 
     public function testInstantiationAndOnlyOneFile( )
