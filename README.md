@@ -1,10 +1,16 @@
 # Germania · ConfigReader
 
+**Merge default and custom configuration files with [Symfony YAML](https://symfony.com/doc/current/components/yaml.html)** 
+
+
+
 ## Installation
 
 ```bash
 $ composer require germania-kg/configreader
 ```
+
+
 
 ## Usage
 
@@ -19,6 +25,29 @@ $reader = new YamlConfigReader( "/path/to/configs");
 // Returns array
 $config = $reader("defaults.yaml", "optionals.yaml");
 ```
+
+
+
+### YAML parsing options
+
+The **setYamlFlags** method allows to set integer flags to be used by Symfony's YAML component. See official  docs for a list of possible values: [Symfony YAML component docs](https://symfony.com/doc/current/components/yaml.html#advanced-usage-flags). 
+
+Ideas for using in config files:
+
+- **Yaml::PARSE_CONSTANT** for evaluating constants created with `.env` configuration
+-  **Yaml::PARSE_DATETIME** to save work with *string-to-DateTime* conversion
+
+*Do not use* **Yaml::PARSE_OBJECT_FOR_MAP** as it will break the internal *array_replace_recursive* call. This is a good topic for future releases.
+
+```php
+<?php
+use use Symfony\Component\Yaml\Yaml;
+
+$reader = new YamlConfigReader( "/path/to/configs");
+$reader->setYamlFlags( Yaml::PARSE_DATETIME | Yaml::PARSE_CONSTANT );
+```
+
+
 
 ### Excluding results
 
@@ -44,7 +73,7 @@ To exclude a certain elements, use **setIgnoreKey** to set the name of a YAML ma
 ```php
 $reader = new YamlConfigReader( "/path/to/configs");
 $reader->setIgnoreKey( "_ignore" );
-$config = $reader("ignoring");
+$config = $reader("ignoring.yaml");
 
 # Will both be FALSE:
 isset( $config["_ignore"])

@@ -18,6 +18,13 @@ class YamlConfigReader
      */
     public $ignore_key = null;
 
+    /**
+     * YAML parsing flags.
+     * @see https://symfony.com/doc/current/components/yaml.html#advanced-usage-flags
+     * @var int
+     */
+    public $yaml_flags = 0;
+
 
     /**
      * @param string $base_dir The config file directory, default: current work dir
@@ -27,8 +34,23 @@ class YamlConfigReader
         $this->base_dir = $base_dir;
     }
 
+
+    /**
+     * Sets    the parsing flags for Simfony's YAML parser.
+     * @see    https://symfony.com/doc/current/components/yaml.html#advanced-usage-flags
+     * @param  int $flags
+     * @return self
+     */
+    public function setYamlFlags( $flags )
+    {
+        $this->yaml_flags = $flags;
+        return $this;
+    }
+
+
     /**
      * @param string|null|false $key "Ignore" key, FALSE or NULL to reset
+     * @return self
      */
     public function setIgnoreKey( $key = null)
     {
@@ -48,7 +70,7 @@ class YamlConfigReader
         // Parse each file
         $per_file_values = array_map(function($file) {
             try {
-                return (array) Yaml::parseFile( $file );
+                return (array) Yaml::parseFile( $file, $this->yaml_flags );
             }
             catch(SymfonyYamlParseException $e) {
                 $msg = sprintf("Could not parse '%s': %s", $file, $e->getMessage());
