@@ -33,7 +33,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $sut = new YamlConfigReader( $this->basedir );
 
         $this->expectException( ParseException::class );
-        $this->expectException( ConfigReaderExceptionInterface::class );
+        # $this->expectException( ConfigReaderExceptionInterface::class );
         $sut( "err_doublekey.yaml" );
     }
 
