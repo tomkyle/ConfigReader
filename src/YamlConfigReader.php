@@ -70,7 +70,7 @@ class YamlConfigReader
         // Parse each file
         $per_file_values = array_map(function($file) {
             try {
-                return (array) Yaml::parseFile( $file, $this->yaml_flags );
+                return (array) Yaml::parseFile( $file, $this->yaml_flags | Yaml::PARSE_EXCEPTION_ON_INVALID_TYPE );
             }
             catch(SymfonyYamlParseException $e) {
                 $msg = sprintf("Could not parse '%s': %s", $file, $e->getMessage());
