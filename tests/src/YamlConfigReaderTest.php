@@ -28,16 +28,6 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    public function testParseExceptionOnDoubleKey( )
-    {
-        $sut = new YamlConfigReader( $this->basedir );
-
-        $this->expectException( ParseException::class );
-        # $this->expectException( ConfigReaderExceptionInterface::class );
-        $sut( "err_doublekey.yaml" );
-    }
-
-
     /**
      * @dataProvider provideIgnoreKeys
      */
