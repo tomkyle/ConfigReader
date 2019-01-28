@@ -2,7 +2,11 @@
 
 **Merge default and custom configuration files with [Symfony YAML](https://symfony.com/doc/current/components/yaml.html)** 
 
-
+[![PHP version](https://img.shields.io/packagist/php-v/germania-kg/configreader.svg)](https://packagist.org/packages/germania-kg/configreader)
+[![Build Status](https://img.shields.io/travis/GermaniaKG/ConfigReader.svg?label=Travis%20CI)](https://travis-ci.org/GermaniaKG/ConfigReader)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/build-status/master)
 
 ## Installation
 
