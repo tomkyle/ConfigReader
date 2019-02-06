@@ -2,11 +2,14 @@
 
 **Merge default and custom configuration files with [Symfony YAML](https://symfony.com/doc/current/components/yaml.html)** 
 
+[![Packagist](https://img.shields.io/packagist/v/germania-kg/configreader.svg?style=flat)](https://packagist.org/packages/germania-kg/configreader)
 [![PHP version](https://img.shields.io/packagist/php-v/germania-kg/configreader.svg)](https://packagist.org/packages/germania-kg/configreader)
 [![Build Status](https://img.shields.io/travis/GermaniaKG/ConfigReader.svg?label=Travis%20CI)](https://travis-ci.org/GermaniaKG/ConfigReader)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/build-status/master)
+
+
 
 ## Installation
 
@@ -107,16 +110,21 @@ catch (ConfigReaderExceptionInterface $e)
 
 ```
 
-
-
 ## Development
 
 ```bash
-$ git clone https://github.com/GermaniaKG/ConfigReader.git configreader
-$ cd configreader
+$ git clone https://github.com/GermaniaKG/ConfigReader.git
+$ cd ConfigReader
 $ composer install
+```
 
-# Run PhpUnit
+## Unit tests
+
+Either copy `phpunit.xml.dist` to `phpunit.xml` and adapt to your needs, or leave as is. Run [PhpUnit](https://phpunit.de/) test or composer scripts like this:
+
+```bash
 $ composer test
+# or
+$ vendor/bin/phpunit
 ```
 
