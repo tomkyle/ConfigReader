@@ -61,12 +61,17 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     public function testYamlParsingOptions( )
     {
         $sut = new YamlConfigReader( $this->basedir );
-        $sut->setYamlFlags( Yaml::PARSE_DATETIME );
-        $result = $sut( "options.yaml" );
 
-        // Assumptions
-        $this->assertInstanceOf ( \DateTime::class,   $result['foo']);
-        $this->assertInstanceOf ( \DateTime::class,   $result['bar']);
+        if (defined('\Symfony\Component\Yaml\Yaml::PARSE_DATETIME')):
+            $sut->setYamlFlags( Yaml::PARSE_DATETIME );
+            $result = $sut( "options.yaml" );
+
+            // Assumptions
+            $this->assertInstanceOf ( \DateTime::class,   $result['foo']);
+            $this->assertInstanceOf ( \DateTime::class,   $result['bar']);
+        else:
+            $this->markTestSkipped('Yaml::PARSE_DATETIME does not exist; test not possible.');
+        endif;
     }
 
 
