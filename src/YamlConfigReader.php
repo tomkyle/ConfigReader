@@ -76,16 +76,14 @@ class YamlConfigReader
                 $msg = sprintf("Could not parse '%s': %s", $file, $e->getMessage());
                 throw new ParseException( $msg, 0, $e );
             }
-        }, $files);
+        }, $files) ?: array();
 
         // Glue arrays, if needed
         if (empty($per_file_values)):
             return array();
-        elseif (count($per_file_values) === 1):
-            $result = $per_file_values[0];
-        else:
-            $result = array_replace_recursive( ...$per_file_values );
         endif;
+
+        $result = array_replace_recursive( ...$per_file_values );
 
         // Handle "ignore keys"
         return $this->removeIgnoreKey($this->ignore_key, $result);
