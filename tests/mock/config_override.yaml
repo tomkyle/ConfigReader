@@ -5,6 +5,8 @@ an_array:
     - four
     - five
 
+# Override array from "config_base"
+another_string: mockingbird
 
 # Add custom value which does not exists in "config_base"
 custom: value
