@@ -98,9 +98,11 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey("a_string", $result);
         $this->assertArrayHasKey("an_array", $result);
         $this->assertArrayHasKey("custom",   $result);
+        $this->assertArrayHasKey("another_string",   $result);
 
         $this->assertEquals("value", $result['custom']);
         $this->assertEquals("bar",   $result['a_string']);
+        $this->assertEquals("mockingbird",   $result['another_string']);
     }
 
 

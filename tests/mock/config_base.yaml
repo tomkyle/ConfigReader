@@ -3,6 +3,9 @@
 # This string should not be altered
 a_string: bar
 
+# This string SHOULD be altered
+another_string: foobar
+
 # This array should be overriden in "config_override"
 an_array:
     - one
