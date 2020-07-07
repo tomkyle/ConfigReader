@@ -13,7 +13,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->basedir = join(DIRECTORY_SEPARATOR, [ dirname(__DIR__), "mock"]);
+        $this->basedir = join(DIRECTORY_SEPARATOR, [ dirname(__DIR__), "mocks"]);
     }
 
 
