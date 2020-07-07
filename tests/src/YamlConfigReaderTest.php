@@ -10,7 +10,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 {
     public $basedir;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->basedir = join(DIRECTORY_SEPARATOR, [ dirname(__DIR__), "mock"]);
@@ -24,7 +24,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $no_file = $this->createFilenameThatNotExists();
 
         $result = $sut( $no_file );
-        $this->assertInternalType("array", $result);
+        $this->assertIsArray( $result);
     }
 
 
@@ -81,7 +81,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $result = $sut( "config_base.yaml" );
 
         // Assumptions
-        $this->assertInternalType("array",   $result);
+        $this->assertIsArray( $result);
         $this->assertArrayHasKey("a_string", $result);
         $this->assertArrayHasKey("an_array", $result);
         $this->assertEquals("bar",   $result['a_string']);
@@ -94,7 +94,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $result = $sut( "config_base.yaml", "config_override.yaml" );
 
         // Assumptions
-        $this->assertInternalType("array",   $result);
+        $this->assertIsArray( $result);
         $this->assertArrayHasKey("a_string", $result);
         $this->assertArrayHasKey("an_array", $result);
         $this->assertArrayHasKey("custom",   $result);
