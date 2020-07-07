@@ -19,9 +19,25 @@ $ composer require germania-kg/configreader
 
 
 
+## Interfaces
+
+The **ConfigReaderInterface** requires an *__invoke* method which may be called with an arbitrary number of filename strings:
+
+```php
+<?php
+namespace Germania\ConfigReader;
+
+interface ConfigReaderInterface
+{
+    public function __invoke( ... $files );
+}
+```
+
+
+
 ## Usage
 
-The **YamlConfigReader** internally uses *array_replace_recursive*. If the given config files do not exist, nothing happens. The return value is an array in any case.
+The **YamlConfigReader** implemens *ConfigReaderInterface*. It internally uses *array_replace_recursive*. If the given config files do not exist, nothing happens. The return value is an array in any case.
 
 ```php
 <?php
@@ -92,8 +108,6 @@ $reader->setIgnoreKey( null );
 
 
 
-
-
 ## Exceptions
 
 When *YamlConfigReader* stumbles upon a *Symfony\Component\Yaml\Exception\ParseException*, it will catch it and wrap it in a **Germania\ConfigReader\ParseException**. This class implements **ConfigReaderExceptionInterface** you can watch out for:
@@ -109,6 +123,10 @@ catch (ConfigReaderExceptionInterface $e)
 }
 
 ```
+
+
+
+
 
 ## Development
 
