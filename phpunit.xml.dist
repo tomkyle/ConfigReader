@@ -20,10 +20,10 @@
 	</filter>
 
 	<logging>
-		<log type="coverage-clover" target="var/build/logs/clover.xml"/>
-		<log type="coverage-html"   target="var/build/logs/html/"/>
-		<log type="testdox-html"    target="var/build/logs/testdox.html"/>
-		<log type="testdox-text"    target="var/build/logs/testdox.txt"/>
+		<log type="coverage-clover" target="tests/log/clover.xml"/>
+		<log type="coverage-html"   target="tests/log/html/"/>
+		<log type="testdox-html"    target="tests/log/testdox.html"/>
+		<log type="testdox-text"    target="tests/log/testdox.txt"/>
 		<log type="coverage-text"   target="php://stdout" showUncoveredFiles="true" />
 	</logging>
 
