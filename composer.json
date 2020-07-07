@@ -1,6 +1,8 @@
 {
 	"name": "germania-kg/configreader",
 
+	"description": "Merge default and custom configuration files with Symfony YAML. Supports CacheItemPools.",
+
 	"license": "MIT",
 	"authors": [
 		{
@@ -14,27 +16,36 @@
 			"Germania\\ConfigReader\\": "src/"
 		}
 	},
-
-  "autoload-dev": {
-      "psr-4": { "tests\\": "tests/src" }
-  },
+	"autoload-dev": {
+		"psr-4": {
+			"tests\\": "tests/src/"
+		}
+	},
 
 	"require": {
 		"php": "^5.6|^7.0",
+		"psr/log": "^1.0",
+		"psr/cache": "^1.0",
 		"symfony/yaml": "^2.0|^3.0|^4.0|^5.0"
 	},
 
 	"require-dev": {
 		"php": "^7.1",
+		"tedivm/stash": "^0.15",
 		"php-coveralls/php-coveralls": "^2.0",
-		"phpunit/phpunit": "^7.0|^8.0|^9.0"
+		"phpunit/phpunit": "^7.0|^8.0|^9.0",
+		"monolog/monolog": "^2.1"
 	},
 
-  "scripts": {
+    "suggest": {
+        "tedivm/stash": "Good caching solution"
+    },
+
+  	"scripts": {
  		"phpunit": "phpunit",
 
-    "test": [
-        "@phpunit"
+    	"test": [
+        	"@phpunit"
 		]
 	}
 }
