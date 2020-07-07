@@ -4,7 +4,7 @@ namespace Germania\ConfigReader;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException as SymfonyYamlParseException;
 
-class YamlConfigReader
+class YamlConfigReader implements ConfigReaderInterface
 {
 
     /**
