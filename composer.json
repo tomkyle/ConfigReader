@@ -23,14 +23,13 @@
 	},
 
 	"require": {
-		"php": "^5.6|^7.0",
+		"php": "^7.1",
 		"psr/log": "^1.0",
 		"psr/cache": "^1.0",
 		"symfony/yaml": "^2.0|^3.0|^4.0|^5.0"
 	},
 
 	"require-dev": {
-		"php": "^7.1",
 		"tedivm/stash": "^0.15",
 		"php-coveralls/php-coveralls": "^2.0",
 		"phpunit/phpunit": "^7.0|^8.0|^9.0",
