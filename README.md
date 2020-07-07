@@ -37,6 +37,8 @@ interface ConfigReaderInterface
 
 ## Usage
 
+### **YamlConfigReader**
+
 The **YamlConfigReader** implemens *ConfigReaderInterface*. It internally uses *array_replace_recursive*. If the given config files do not exist, nothing happens. The return value is an array in any case.
 
 ```php
@@ -47,6 +49,26 @@ $reader = new YamlConfigReader( "/path/to/configs");
 
 // Returns array
 $config = $reader("defaults.yaml", "optionals.yaml");
+```
+
+#### PSR-6 Cache support
+
+The **CacheConfigReader** also implements *ConfigReaderInterface* and combines a *ConfigReaderInterface* instance with PSR-6 Cache functionality. 
+
+```php
+<?php
+use Germania\ConfigReader\YamlConfigReader;
+use Germania\ConfigReader\CacheConfigReader;
+
+$reader = new YamlConfigReader( "/path/to/configs");
+$cache_item_pool = ... // PSR-6 CacheItemPool
+$cache_lifetime = 3600;
+$logger = ...
+  
+$cache_reader = new CacheConfigReader($reader, $cache_item_pool, $cache_lifetime);
+$cache_reader = new CacheConfigReader($reader, $cache_item_pool, $cache_lifetime, $logger);
+
+$config = $cache_reader("defaults.yaml", "optionals.yaml");
 ```
 
 
