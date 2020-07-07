@@ -16,10 +16,6 @@ build:
 
     nodes:
 
-        php70:
-            environment:
-                php: 7.0
-
         php71:
             environment:
                 php: 7.1
