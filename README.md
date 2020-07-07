@@ -128,3 +128,5 @@ $ composer test
 $ vendor/bin/phpunit
 ```
 
+The test results logs are in the `tests/log` directory.
+
