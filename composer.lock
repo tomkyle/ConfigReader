@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4555dcbbb443168325db4f20411801be",
+    "content-hash": "a3f93482d217587f8e15805a4972bef3",
     "packages": [
+        {
+            "name": "germania-kg/cachecallable",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GermaniaKG/CacheCallable.git",
+                "reference": "1d3d9e7d36060d99eac8b0bc48bd57fca724c971"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GermaniaKG/CacheCallable/zipball/1d3d9e7d36060d99eac8b0bc48bd57fca724c971",
+                "reference": "1d3d9e7d36060d99eac8b0bc48bd57fca724c971",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "psr/cache": "^1.0",
+                "psr/log": "^1.0",
+                "tedivm/stash": "^0.15"
+            },
+            "require-dev": {
+                "monolog/monolog": "^1.21",
+                "php": "^7.1",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Germania\\Cache\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Witt",
+                    "email": "carstenwitt@germania-kg.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Callable convenience wrapper around PSR-6 Cache Item Pools: Seamlessly create, return, and store your data.",
+            "keywords": [
+                "cache",
+                "caching",
+                "callable",
+                "middleware",
+                "php",
+                "psr-6"
+            ],
+            "time": "2020-07-08T14:13:27+00:00"
+        },
         {
             "name": "psr/cache",
             "version": "1.0.1",
@@ -315,6 +369,66 @@
                 }
             ],
             "time": "2020-05-20T17:43:50+00:00"
+        },
+        {
+            "name": "tedivm/stash",
+            "version": "v0.15.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tedious/Stash.git",
+                "reference": "7a6a74106c49b1bdc3a10a725b03c509dc773dbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tedious/Stash/zipball/7a6a74106c49b1bdc3a10a725b03c509dc773dbb",
+                "reference": "7a6a74106c49b1bdc3a10a725b03c509dc773dbb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "psr/cache": "~1.0"
+            },
+            "provide": {
+                "psr/cache-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.8",
+                "phpunit/phpunit": "^6",
+                "satooshi/php-coveralls": "1.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stash\\": "src/Stash/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Hafner",
+                    "email": "tedivm@tedivm.com"
+                },
+                {
+                    "name": "Josh Hall-Bachner",
+                    "email": "charlequin@gmail.com"
+                }
+            ],
+            "description": "The place to keep your cache.",
+            "homepage": "http://github.com/tedious/Stash",
+            "keywords": [
+                "apc",
+                "cache",
+                "caching",
+                "memcached",
+                "psr-6",
+                "psr6",
+                "redis",
+                "sessions"
+            ],
+            "time": "2019-03-09T21:04:14+00:00"
         }
     ],
     "packages-dev": [
@@ -760,18 +874,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
@@ -807,18 +921,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -1056,33 +1170,33 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.10.3",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "451c3cd1418cf640de218914901e51b064abb093"
+                "reference": "b20034be5efcdab4fb60ca3a29cba2949aead160"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/451c3cd1418cf640de218914901e51b064abb093",
-                "reference": "451c3cd1418cf640de218914901e51b064abb093",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/b20034be5efcdab4fb60ca3a29cba2949aead160",
+                "reference": "b20034be5efcdab4fb60ca3a29cba2949aead160",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "^1.0.2",
-                "php": "^5.3|^7.0",
-                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0",
-                "sebastian/comparator": "^1.2.3|^2.0|^3.0|^4.0",
-                "sebastian/recursion-context": "^1.0|^2.0|^3.0|^4.0"
+                "doctrine/instantiator": "^1.2",
+                "php": "^7.2",
+                "phpdocumentor/reflection-docblock": "^5.0",
+                "sebastian/comparator": "^3.0 || ^4.0",
+                "sebastian/recursion-context": "^3.0 || ^4.0"
             },
             "require-dev": {
-                "phpspec/phpspec": "^2.5 || ^3.2",
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5 || ^7.1"
+                "phpspec/phpspec": "^6.0",
+                "phpunit/phpunit": "^8.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.10.x-dev"
+                    "dev-master": "1.11.x-dev"
                 }
             },
             "autoload": {
@@ -1115,7 +1229,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2020-03-05T15:02:03+00:00"
+            "time": "2020-07-08T12:44:21+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3444,66 +3558,6 @@
             "time": "2020-06-11T12:16:36+00:00"
         },
         {
-            "name": "tedivm/stash",
-            "version": "v0.15.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tedious/Stash.git",
-                "reference": "7a6a74106c49b1bdc3a10a725b03c509dc773dbb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tedious/Stash/zipball/7a6a74106c49b1bdc3a10a725b03c509dc773dbb",
-                "reference": "7a6a74106c49b1bdc3a10a725b03c509dc773dbb",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "psr/cache": "~1.0"
-            },
-            "provide": {
-                "psr/cache-implementation": "1.0.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.8",
-                "phpunit/phpunit": "^6",
-                "satooshi/php-coveralls": "1.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Stash\\": "src/Stash/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Hafner",
-                    "email": "tedivm@tedivm.com"
-                },
-                {
-                    "name": "Josh Hall-Bachner",
-                    "email": "charlequin@gmail.com"
-                }
-            ],
-            "description": "The place to keep your cache.",
-            "homepage": "http://github.com/tedious/Stash",
-            "keywords": [
-                "apc",
-                "cache",
-                "caching",
-                "memcached",
-                "psr-6",
-                "psr6",
-                "redis",
-                "sessions"
-            ],
-            "time": "2019-03-09T21:04:14+00:00"
-        },
-        {
             "name": "theseer/tokenizer",
             "version": "1.1.3",
             "source": {
@@ -3536,8 +3590,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
@@ -3599,10 +3653,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^5.6|^7.0"
-    },
-    "platform-dev": {
         "php": "^7.1"
     },
+    "platform-dev": [],
     "plugin-api-version": "1.1.0"
 }
