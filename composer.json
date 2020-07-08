@@ -26,11 +26,11 @@
 		"php": "^7.1",
 		"psr/log": "^1.0",
 		"psr/cache": "^1.0",
-		"symfony/yaml": "^2.0|^3.0|^4.0|^5.0"
+		"symfony/yaml": "^2.0|^3.0|^4.0|^5.0",
+		"germania-kg/cachecallable": "^2.0"
 	},
 
 	"require-dev": {
-		"tedivm/stash": "^0.15",
 		"php-coveralls/php-coveralls": "^2.0",
 		"phpunit/phpunit": "^7.0|^8.0|^9.0",
 		"monolog/monolog": "^2.1"
