@@ -5,9 +5,12 @@ use Germania\ConfigReader\YamlConfigReader;
 use Germania\ConfigReader\ParseException;
 use Germania\ConfigReader\ConfigReaderExceptionInterface;
 use Symfony\Component\Yaml\Yaml;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 {
+    use ProphecyTrait;
+
     public $basedir;
 
     public function setUp() : void

@@ -8,12 +8,15 @@ use Psr\Cache\CacheItemInterface;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
 {
+    use ProphecyTrait;
+
     public $logger;
 
-    public function setUp() : void 
+    public function setUp() : void
     {
         $this->logger = new Logger("CacheConfigReaderTest", [
             new StreamHandler('php://stdout', 0)
@@ -58,7 +61,7 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
         $reader_mock = $this->prophesize( ConfigReaderInterface::class );
 
         if (!$is_cache_hit) {
-            $reader_mock->__invoke($key)->shouldBeCalled();            
+            $reader_mock->__invoke($key)->shouldBeCalled();
         }
         $reader_mock->__invoke($key)->wilLReturn($expected_result);
         $reader = $reader_mock->reveal();
@@ -70,8 +73,8 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
         $cache_item_mock->get()->willReturn( $expected_result );
 
         if (!$is_cache_hit) {
-            $cache_item_mock->set(Argument::type("string"))->shouldBeCalled();            
-            $cache_item_mock->expiresAfter($cache_lifetime)->shouldBeCalled();            
+            $cache_item_mock->set(Argument::type("string"))->shouldBeCalled();
+            $cache_item_mock->expiresAfter($cache_lifetime)->shouldBeCalled();
         }
         $cache_item = $cache_item_mock->reveal();
 
@@ -81,9 +84,9 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
         $cache_itempool_mock->getItem(Argument::type("string"))->willReturn($cache_item);
 
         if (!$is_cache_hit) {
-            $cache_itempool_mock->save(Argument::any())->shouldBeCalled();            
+            $cache_itempool_mock->save(Argument::any())->shouldBeCalled();
         }
-        
+
         $cache_itempool = $cache_itempool_mock->reveal();
 
 
