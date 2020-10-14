@@ -16,10 +16,6 @@ build:
 
     nodes:
 
-        php71:
-            environment:
-                php: 7.1
-
         php72:
             environment:
                 php: 7.2
@@ -27,6 +23,10 @@ build:
         php73:
             environment:
                 php: 7.3
+
+        php74:
+            environment:
+                php: 7.4
 
 
 checks:
