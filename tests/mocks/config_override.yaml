@@ -11,3 +11,7 @@ another_string: mockingbird
 # Add custom value which does not exists in "config_base"
 custom: value
 
+# Use associative array:
+assoc_array:
+    foo:  milli
+    tres: pas

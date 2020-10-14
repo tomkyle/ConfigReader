@@ -27,6 +27,13 @@ class YamlConfigReader implements ConfigReaderInterface
 
 
     /**
+     * The merging function
+     * @var callable
+     */
+    public $merger;
+
+
+    /**
      * @param string $base_dir The config file directory, default: current work dir
      */
     public function __construct( $base_dir = null)
@@ -59,6 +66,36 @@ class YamlConfigReader implements ConfigReaderInterface
     }
 
 
+
+    /**
+     * Returns the merging function.
+     *
+     * @return callable
+     */
+    public function getMerger() : callable
+    {
+        if (!is_callable($this->merger)) {
+            $fn = function(...$per_file_values) {
+                return array_replace_recursive( ...$per_file_values );
+            };
+            $this->setMerger( $fn );
+        }
+        return $this->merger;
+    }
+
+
+    /**
+     * Sets the merging function.
+     *
+     * @param callable $merger
+     */
+    public function setMerger( callable $merger )
+    {
+        $this->merger = $merger;
+        return $this;
+    }
+
+
     /**
      * @param string[] $files
      */
@@ -83,7 +120,7 @@ class YamlConfigReader implements ConfigReaderInterface
             return array();
         endif;
 
-        $result = array_replace_recursive( ...$per_file_values );
+        $result = ($this->getMerger())( ...$per_file_values );
 
         // Handle "ignore keys"
         return $this->removeIgnoreKey($this->ignore_key, $result);

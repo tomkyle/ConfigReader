@@ -12,3 +12,7 @@ an_array:
     - two
     - three
 
+# Use associative array:
+assoc_array:
+    foo: bar
+    zuq: faz

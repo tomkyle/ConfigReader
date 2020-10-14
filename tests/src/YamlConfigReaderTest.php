@@ -94,6 +94,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     public function testInstantiationAndOverddingFiles( )
     {
         $sut = new YamlConfigReader( $this->basedir );
+
         $result = $sut( "config_base.yaml", "config_override.yaml" );
 
         // Assumptions
@@ -102,10 +103,32 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey("an_array", $result);
         $this->assertArrayHasKey("custom",   $result);
         $this->assertArrayHasKey("another_string",   $result);
+        $this->assertArrayHasKey("assoc_array",   $result);
 
         $this->assertEquals("value", $result['custom']);
         $this->assertEquals("bar",   $result['a_string']);
         $this->assertEquals("mockingbird",   $result['another_string']);
+
+        $this->assertEquals(3, count($result['assoc_array']));
+        $raw_override = $sut(  "config_override.yaml" );
+        $this->assertEquals($result['assoc_array']['foo'], $raw_override['assoc_array']['foo']);
+    }
+
+
+    public function testOverridingMerging( )
+    {
+        $sut = new YamlConfigReader( $this->basedir );
+        $sut->setMerger( function (... $configs ) {
+            return array('numberOfConfigs' => count($configs));
+        });
+
+        $result = $sut( "config_base.yaml", "config_override.yaml" );
+
+        // Assumptions
+        $this->assertIsArray( $result);
+        $this->assertArrayHasKey("numberOfConfigs", $result);
+        $this->assertEquals(2, $result['numberOfConfigs']);
+
     }
 
 
