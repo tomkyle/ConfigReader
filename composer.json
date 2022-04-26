@@ -42,10 +42,11 @@
     },
 
   	"scripts": {
- 		"phpunit": "phpunit",
+ 			"phpunit": "phpunit --coverage-text",
+ 			"phpunit:clover": "phpunit --coverage-clover tests/build/clover.xml",
 
     	"test": [
-        	"@phpunit"
-		]
+      	"@phpunit"
+			]
 	}
 }
