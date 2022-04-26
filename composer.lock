@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a22d7f83fca809690650aa1efab5bba",
+    "content-hash": "64fa13966c3729527ee10ccefc1d86e4",
     "packages": [
         {
             "name": "germania-kg/cachecallable",
@@ -4188,7 +4188,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2|^8.0"
+        "php": "^7.3|^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
