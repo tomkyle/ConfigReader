@@ -13,6 +13,7 @@ build:
         coverage:
           file: 'tests/build/clover.xml'
           format: 'clover'
+      - php-scrutinizer-run
 
   nodes:
 
