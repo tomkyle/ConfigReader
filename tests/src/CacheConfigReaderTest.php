@@ -73,7 +73,7 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
         $cache_item_mock->get()->willReturn( $expected_result );
 
         if (!$is_cache_hit) {
-            $cache_item_mock->set(Argument::type("string"))->shouldBeCalled();
+            $cache_item_mock->set(Argument::type("string"))->willReturn($cache_item_mock);
             $cache_item_mock->expiresAfter($cache_lifetime)->shouldBeCalled();
         }
         $cache_item = $cache_item_mock->reveal();
