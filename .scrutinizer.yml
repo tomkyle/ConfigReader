@@ -13,18 +13,18 @@ build:
         coverage:
           file: 'tests/build/clover.xml'
           format: 'clover'
-      # - php-scrutinizer-run
+      - php-scrutinizer-run
 
   nodes:
 
-    #php73:
-    #  environment:
-    #    php: 7.3
-#
-    #php74:
-    #  environment:
-    #    php: 7.4
-#
+    php73:
+     environment:
+       php: 7.3
+
+    php74:
+     environment:
+       php: 7.4
+
     php80:
       environment:
         php: 8.0
