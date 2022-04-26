@@ -4,6 +4,7 @@
 
 [![Packagist](https://img.shields.io/packagist/v/germania-kg/configreader.svg?style=flat)](https://packagist.org/packages/germania-kg/configreader)
 [![PHP version](https://img.shields.io/packagist/php-v/germania-kg/configreader.svg)](https://packagist.org/packages/germania-kg/configreader)
+[![PHP Composer](https://github.com/GermaniaKG/ConfigReader/actions/workflows/php.yml/badge.svg)](https://github.com/GermaniaKG/ConfigReader/actions/workflows/php.yml)
 [![Build Status](https://img.shields.io/travis/GermaniaKG/ConfigReader.svg?label=Travis%20CI)](https://travis-ci.org/GermaniaKG/ConfigReader)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/ConfigReader/?branch=master)
