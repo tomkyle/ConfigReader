@@ -2,43 +2,43 @@
 
 build:
 
-    dependencies:
-        before:
-            - rm composer.lock
+  dependencies:
+    before:
+      - rm composer.lock
 
-    tests:
-        override:
-            -
-                command: 'vendor/bin/phpunit --coverage-clover=coverage'
-                coverage:
-                    file: 'coverage'
-                    format: 'php-clover'
+  tests:
+    override:
+      -
+        command: 'phpdbg -qrr vendor/bin/phpunit --coverage-clover tests/build/clover.xml'
+        coverage:
+          file: 'tests/build/clover.xml'
+          format: 'clover'
+      - php-scrutinizer-run
 
-    nodes:
+  nodes:
 
-        php72:
-            environment:
-                php: 7.2
+    php73:
+     environment:
+       php: 7.3
 
-        php73:
-            environment:
-                php: 7.3
+    php74:
+     environment:
+       php: 7.4
 
-        php74:
-            environment:
-                php: 7.4
+    php80:
+      environment:
+        php: 8.0
 
-        php80:
-            environment:
-                php: 8.0
+    php81:
+      environment:
+        php: 8.1
 
 
 checks:
-    php:
-        code_rating: true
-        duplication: true
+  php: true
+
 
 filter:
-    excluded_paths:
-        - tests/*
+  excluded_paths:
+    - tests/*
 

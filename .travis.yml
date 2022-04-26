@@ -1,12 +1,12 @@
 # .travis.yml
 
 language: php
+
 php:
-  - "7.2"
   - "7.3"
   - "7.4"
   - "8.0"
-
+  - "8.1"
 
 env:
 
@@ -17,8 +17,7 @@ before_script:
   - cp phpunit.xml.dist phpunit.xml
 
 script:
-  - vendor/bin/phpunit
+  - composer phpunit
 
 after_script:
-
 

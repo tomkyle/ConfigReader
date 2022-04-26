@@ -23,8 +23,8 @@
 	},
 
 	"require": {
-		"php": "^7.2|^8.0",
-		"psr/log": "^1.0",
+		"php": "^7.3|^8.0",
+		"psr/log": "^1.0|^2.0|^3.0",
 		"psr/cache": "^1.0|^2.0|^3.0",
 		"symfony/yaml": "^2.0|^3.0|^4.0|^5.0",
 		"germania-kg/cachecallable": "^2.0"
@@ -42,10 +42,11 @@
     },
 
   	"scripts": {
- 		"phpunit": "phpunit",
+ 			"phpunit": "phpunit --coverage-text",
+ 			"phpunit:clover": "phpunit --coverage-clover tests/build/clover.xml",
 
     	"test": [
-        	"@phpunit"
-		]
+      	"@phpunit"
+			]
 	}
 }
