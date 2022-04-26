@@ -14,12 +14,14 @@
 ## Installation
 
 - v2 requires PHP 7.1 
-- v3 requires PHP 7.2
+- v3.0 requires PHP 7.2+
+- v3.1 requires PHP 7.3+
 
 ```bash
 $ composer require germania-kg/configreader
 $ composer require germania-kg/configreader:^2.0
 $ composer require germania-kg/configreader:^3.0
+$ composer require germania-kg/configreader:^3.1
 ```
 
 
