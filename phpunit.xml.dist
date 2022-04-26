@@ -26,7 +26,6 @@
 	</coverage>
 
 	<logging>
-		<log type="coverage-clover" target="tests/build/clover.xml"/>
 		<testdoxHtml outputFile="tests/build/testdox.html"/>
 		<testdoxText outputFile="tests/build/testdox.txt"/>
 	</logging>
