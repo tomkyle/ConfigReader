@@ -19,7 +19,7 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
     public function setUp() : void
     {
         $this->logger = new Logger("CacheConfigReaderTest", [
-            new StreamHandler('php://stdout', 0)
+            new StreamHandler('php://stdout', \Psr\Log\LogLevel::DEBUG)
         ]);
 
     }
