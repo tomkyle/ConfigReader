@@ -70,8 +70,8 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
             $result = $sut( "options.yaml" );
 
             // Assumptions
-            $this->assertInstanceOf ( \DateTime::class,   $result['foo']);
-            $this->assertInstanceOf ( \DateTime::class,   $result['bar']);
+            $this->assertInstanceOf ( \DateTimeInterface::class,   $result['foo']);
+            $this->assertInstanceOf ( \DateTimeInterface::class,   $result['bar']);
         else:
             $this->markTestSkipped('Yaml::PARSE_DATETIME does not exist; test not possible.');
         endif;
