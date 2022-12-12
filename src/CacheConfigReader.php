@@ -28,6 +28,11 @@ class CacheConfigReader implements ConfigReaderInterface
      */
     public $reader;
 
+    /**
+     * @var CacheCallable
+     */
+    public $cache_callable;
+
 
     /**
      * PSR-3 Loglevel name
