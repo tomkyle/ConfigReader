@@ -54,3 +54,4 @@ tests/log
 phpunit.xml
 
 
+phpstan.neon
