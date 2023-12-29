@@ -4,6 +4,6 @@
 # Create a custom phpstan.neon to override settings
 
 parameters:
-    level: 2
+    level: 4
     paths:
         - src
