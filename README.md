@@ -1,8 +1,6 @@
 # tomkyle · ConfigReader
 
-**Successor of [GermaniaKG/ConfigReader](https://github.com/GermaniaKG/ConfigReader). This package will match newer PHP versions.**
-
-**Merge default and custom configuration files with [Symfony YAML](https://symfony.com/doc/current/components/yaml.html)** 
+**PHP 8.1+ successor of [GermaniaKG/ConfigReader](https://github.com/GermaniaKG/ConfigReader)** by its original author. Reads and merges default and custom configuration files with [Symfony YAML](https://symfony.com/doc/current/components/yaml.html)** 
 
 [![Packagist](https://img.shields.io/packagist/v/tomkyle/configreader.svg?style=flat)](https://packagist.org/packages/tomkyle/configreader)
 [![PHP version](https://img.shields.io/packagist/php-v/tomkyle/configreader.svg)](https://packagist.org/packages/tomkyle/configreader)
