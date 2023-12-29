@@ -51,6 +51,7 @@ _schrott
 vendor
 node_modules
 tests/log
+tests/build
 phpunit.xml
 
 
