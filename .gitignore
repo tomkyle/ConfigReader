@@ -48,6 +48,7 @@ logs/*
 # Workflow files     #
 ######################
 _schrott
+*.bak
 vendor
 node_modules
 tests/log
