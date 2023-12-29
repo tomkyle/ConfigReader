@@ -38,7 +38,7 @@ jobs:
           dependency-versions: ${{ matrix.dependency-versions }}
 
       - name: Run PHPUnit
-        run: vendor/bin/phpunit tests
+        run: vendor/bin/phpunit --no-coverage tests
 
       - name: Run phpstan
         run: vendor/bin/phpstan analyse
