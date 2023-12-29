@@ -8,8 +8,8 @@
 [![PHP version](https://img.shields.io/packagist/php-v/tomkyle/configreader.svg)](https://packagist.org/packages/tomkyle/configreader)
 [![Tests](https://github.com/tomkyle/ConfigReader/actions/workflows/tests.yml/badge.svg)](https://github.com/tomkyle/ConfigReader/actions/workflows/tests.yml)
 
-
 **🔜 This package will have version v3.3 and require PHP 8.1+**
+
 **🔜 From v4 onwards, the namespace will change from **
 **`Germania\ConfigReader` to `tomkyle\ConfigReader`**
 
