@@ -1,13 +1,13 @@
 {
-	"name": "germania-kg/configreader",
+	"name": "tomkyle/configreader",
 
-	"description": "Merge default and custom configuration files with Symfony YAML. Supports CacheItemPools.",
+	"description": "Successor of germania-kg/configreader: Merge default and custom configuration files with Symfony YAML. Supports CacheItemPools. ",
 
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "Carsten Witt",
-			"email": "carstenwitt@germania-kg.de",
+			"email": "tomkyle@posteo.de",
 			"role": "Developer"
 		}
 	],
