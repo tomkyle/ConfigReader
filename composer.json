@@ -38,16 +38,16 @@
 		"phpstan/phpstan": "^1.9"
 	},
 
-    "suggest": {
-        "tedivm/stash": "Good caching solution"
-    },
+  "suggest": {
+      "tedivm/stash": "Good caching solution"
+  },
 
-  	"scripts": {
- 			"phpunit": "phpunit --coverage-text",
- 			"phpunit:clover": "phpunit --coverage-clover tests/build/clover.xml",
+	"scripts": {
+			"phpunit": "phpunit --coverage-text",
+			"phpunit:clover": "phpunit --coverage-clover tests/build/clover.xml",
 
-    	"test": [
-      	"@phpunit"
-			]
+  	"test": [
+    	"@phpunit"
+		]
 	}
 }
