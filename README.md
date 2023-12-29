@@ -8,18 +8,14 @@
 [![PHP version](https://img.shields.io/packagist/php-v/tomkyle/configreader.svg)](https://packagist.org/packages/tomkyle/configreader)
 [![Tests](https://github.com/tomkyle/ConfigReader/actions/workflows/tests.yml/badge.svg)](https://github.com/tomkyle/ConfigReader/actions/workflows/tests.yml)
 
-**🔜 This package will have version v3.3 and require PHP 8.1+**
+**🔜 This package will is version v3.3 and requires PHP 8.1+**
 
 **🔜 From v4 onwards, the namespace will change from **
 **`Germania\ConfigReader` to `tomkyle\ConfigReader`**
 
 ## Installation
 
-- v2 requires PHP 7.1 
-- v3.0 requires PHP 7.2+
-- v3.1 requires PHP 7.3+
-- v3.2 requires PHP 7.4+
-- v3.3 requires PHP 8.1+
+For older PHP versions 7.1 to 8.0, head over to [GermaniaKG/ConfigReader](https://github.com/GermaniaKG/ConfigReader) or [germania-kg/configreader](https://packagist.org/packages/germania-kg/configreader) on Packagist. 
 
 
 ```bash
