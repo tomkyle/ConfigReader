@@ -96,7 +96,7 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($result, $expected_result);
     }
 
-    public function provideCacheKey()
+    public static function provideCacheKey()
     {
 
         return array(
