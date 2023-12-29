@@ -51,7 +51,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    public function provideIgnoreKeys()
+    public static function provideIgnoreKeys()
     {
         return [
             [ "_ignore", array( "foo" ) ],
