@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		colors="true"
-		stopOnFailure="true"
-		bootstrap="tests/bootstrap.php"
-		beStrictAboutCoversAnnotation="true"
-		verbose="true"
-		xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+	colors="true"
+	stopOnFailure="true"
+	bootstrap="tests/bootstrap.php"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+	cacheDirectory=".phpunit.cache"
+	beStrictAboutCoverageMetadata="true">
 
-	<testsuites>
-		<testsuite name="unit">
-			<directory>tests/src</directory>
-		</testsuite>
-	</testsuites>
+  <testsuites>
+    <testsuite name="unit">
+      <directory>tests/src</directory>
+    </testsuite>
+  </testsuites>
 
-	<coverage processUncoveredFiles="true">
-		<include>
-			<directory>src</directory>
-		</include>
-		<report>
-			<clover outputFile="tests/build/clover.xml"/>
-			<html outputDirectory="tests/build/html/"/>
-			<text outputFile="php://stdout" showUncoveredFiles="true"/>
-		</report>
-	</coverage>
+  <coverage>
+    <report>
+      <clover outputFile="tests/build/clover.xml"/>
+      <html outputDirectory="tests/build/html/"/>
+      <text outputFile="php://stdout" showUncoveredFiles="true"/>
+    </report>
+  </coverage>
 
-	<logging>
-		<testdoxHtml outputFile="tests/build/testdox.html"/>
-		<testdoxText outputFile="tests/build/testdox.txt"/>
-	</logging>
+  <logging>
+    <testdoxHtml outputFile="tests/build/testdox.html"/>
+    <testdoxText outputFile="tests/build/testdox.txt"/>
+  </logging>
 
+  <source>
+    <include>
+      <directory>src</directory>
+    </include>
+  </source>
 </phpunit>
