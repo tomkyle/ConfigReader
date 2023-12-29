@@ -1,4 +1,6 @@
-# Germania · ConfigReader
+# tomkyle · ConfigReader
+
+**Successor of [GermaniaKG/ConfigReader](https://github.com/GermaniaKG/ConfigReader). This package will match newer PHP versions.**
 
 **Merge default and custom configuration files with [Symfony YAML](https://symfony.com/doc/current/components/yaml.html)** 
 
