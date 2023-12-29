@@ -4,10 +4,14 @@
 
 **Merge default and custom configuration files with [Symfony YAML](https://symfony.com/doc/current/components/yaml.html)** 
 
-[![Packagist](https://img.shields.io/packagist/v/germania-kg/configreader.svg?style=flat)](https://packagist.org/packages/germania-kg/configreader)
-[![PHP version](https://img.shields.io/packagist/php-v/germania-kg/configreader.svg)](https://packagist.org/packages/germania-kg/configreader)
-[![Tests](https://github.com/GermaniaKG/ConfigReader/actions/workflows/tests.yml/badge.svg)](https://github.com/GermaniaKG/ConfigReader/actions/workflows/tests.yml)
+[![Packagist](https://img.shields.io/packagist/v/tomkyle/configreader.svg?style=flat)](https://packagist.org/packages/tomkyle/configreader)
+[![PHP version](https://img.shields.io/packagist/php-v/tomkyle/configreader.svg)](https://packagist.org/packages/tomkyle/configreader)
+[![Tests](https://github.com/tomkyle/ConfigReader/actions/workflows/tests.yml/badge.svg)](https://github.com/tomkyle/ConfigReader/actions/workflows/tests.yml)
 
+
+**🔜 This package will have version v3.3 and require PHP 8.1+**
+**🔜 From v4 onwards, the namespace will change from **
+**`Germania\ConfigReader` to `tomkyle\ConfigReader`**
 
 ## Installation
 
@@ -15,9 +19,11 @@
 - v3.0 requires PHP 7.2+
 - v3.1 requires PHP 7.3+
 - v3.2 requires PHP 7.4+
+- v3.3 requires PHP 8.1+
+
 
 ```bash
-$ composer require germania-kg/configreader
+$ composer require tomkyle/configreader
 ```
 
 
@@ -156,7 +162,7 @@ catch (ConfigReaderExceptionInterface $e)
 ## Development
 
 ```bash
-$ git clone https://github.com/GermaniaKG/ConfigReader.git
+$ git clone https://github.com/tomkyle/ConfigReader.git
 $ cd ConfigReader
 $ composer install
 ```
