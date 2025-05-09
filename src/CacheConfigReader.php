@@ -41,7 +41,7 @@ class CacheConfigReader implements ConfigReaderInterface
     public $loglevel_success =LogLevel::INFO;
 
 
-    public function __construct( ConfigReaderInterface $reader, CacheItemPoolInterface $cache, int $lifetime, LoggerInterface $logger = null, string $loglevel_success = null)
+    public function __construct( ConfigReaderInterface $reader, CacheItemPoolInterface $cache, int $lifetime, ?LoggerInterface $logger = null, ?string $loglevel_success = null)
     {
         $this->reader = $reader;
         $this->cache_itempool = $cache;
@@ -64,8 +64,8 @@ class CacheConfigReader implements ConfigReaderInterface
         $cache_key = sha1($files_concat);
 
         // Utilize CacheCallable with custom creator function
-        return ($this->cache_callable)($cache_key, function( $cache_key ) use ($files) { 
-            return ($this->reader)(... $files); 
+        return ($this->cache_callable)($cache_key, function( $cache_key ) use ($files) {
+            return ($this->reader)(... $files);
         });
 
     }

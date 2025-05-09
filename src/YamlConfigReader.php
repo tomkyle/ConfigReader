@@ -28,7 +28,7 @@ class YamlConfigReader implements ConfigReaderInterface
 
     /**
      * The merging function
-     * @var callable
+     * @var callable|null
      */
     public $merger;
 
@@ -74,7 +74,7 @@ class YamlConfigReader implements ConfigReaderInterface
      */
     public function getMerger() : callable
     {
-        if (!is_callable($this->merger)) {
+        if (empty($this->merger)) {
             $fn = function(...$per_file_values) {
                 return array_replace_recursive( ...$per_file_values );
             };
