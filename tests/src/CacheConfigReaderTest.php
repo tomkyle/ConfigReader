@@ -15,7 +15,7 @@ class CacheConfigReaderTest extends TestCase
 
     public $logger;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->logger = new Logger("CacheConfigReaderTest", [
             new StreamHandler('php://stdout', \Psr\Log\LogLevel::DEBUG)
@@ -28,8 +28,8 @@ class CacheConfigReaderTest extends TestCase
         $reader = $this->createMock(ConfigReaderInterface::class);
         $cache_itempool = $this->createMock(CacheItemPoolInterface::class);
 
-        $sut = new CacheConfigReader($reader, $cache_itempool, 10, $this->logger );
-        $this->assertInstanceOf( ConfigReaderInterface::class, $sut);
+        $cacheConfigReader = new CacheConfigReader($reader, $cache_itempool, 10, $this->logger );
+        $this->assertInstanceOf( ConfigReaderInterface::class, $cacheConfigReader);
     }
 
 
@@ -44,8 +44,8 @@ class CacheConfigReaderTest extends TestCase
 
         $cache_lifetime = 0;
 
-        $sut = new CacheConfigReader($reader, $cache_itempool, $cache_lifetime, $this->logger );
-        $sut("foo");
+        $cacheConfigReader = new CacheConfigReader($reader, $cache_itempool, $cache_lifetime, $this->logger );
+        $cacheConfigReader("foo");
     }
 
 
@@ -95,8 +95,8 @@ class CacheConfigReaderTest extends TestCase
                            ->with($cache_item);
         }
 
-        $sut = new CacheConfigReader($reader, $cache_itempool, $cache_lifetime, $this->logger );
-        $result = $sut( $key );
+        $cacheConfigReader = new CacheConfigReader($reader, $cache_itempool, $cache_lifetime, $this->logger );
+        $result = $cacheConfigReader( $key );
 
         $this->assertEquals($expected_result, $result);
     }
@@ -104,11 +104,11 @@ class CacheConfigReaderTest extends TestCase
     public static function provideCacheKey()
     {
 
-        return array(
+        return [
             [ "foo", "bar", true, 99],
             [ "foo", "bar", true, 0],
             [ "foo", "bar", false, 100]
-        );
+        ];
     }
 
 
