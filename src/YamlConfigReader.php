@@ -8,15 +8,9 @@ class YamlConfigReader implements ConfigReaderInterface
 {
 
     /**
-     * The config file directory
-     * @var string
-     */
-    public $base_dir;
-
-    /**
      * @var string|null
      */
-    public $ignore_key = null;
+    public $ignore_key;
 
     /**
      * YAML parsing flags.
@@ -36,9 +30,13 @@ class YamlConfigReader implements ConfigReaderInterface
     /**
      * @param string $base_dir The config file directory, default: current work dir
      */
-    public function __construct( $base_dir = null)
+    public function __construct(
+        /**
+         * The config file directory
+         */
+        public $base_dir = null
+    )
     {
-        $this->base_dir = $base_dir;
     }
 
 
@@ -69,25 +67,20 @@ class YamlConfigReader implements ConfigReaderInterface
 
     /**
      * Returns the merging function.
-     *
-     * @return callable
      */
     public function getMerger() : callable
     {
         if (empty($this->merger)) {
-            $fn = function(...$per_file_values) {
-                return array_replace_recursive( ...$per_file_values );
-            };
+            $fn = (fn(...$per_file_values) => array_replace_recursive( ...$per_file_values ));
             $this->setMerger( $fn );
         }
+
         return $this->merger;
     }
 
 
     /**
      * Sets the merging function.
-     *
-     * @param callable $merger
      */
     public function setMerger( callable $merger )
     {
@@ -109,15 +102,15 @@ class YamlConfigReader implements ConfigReaderInterface
             try {
                 return (array) Yaml::parse(file_get_contents( $file), $this->yaml_flags );
             }
-            catch(SymfonyYamlParseException $e) {
-                $msg = sprintf("Could not parse '%s': %s", $file, $e->getMessage());
-                throw new ParseException( $msg, 0, $e );
+            catch(SymfonyYamlParseException $symfonyYamlParseException) {
+                $msg = sprintf("Could not parse '%s': %s", $file, $symfonyYamlParseException->getMessage());
+                throw new ParseException( $msg, 0, $symfonyYamlParseException );
             }
-        }, $files) ?: array();
+        }, $files) ?: [];
 
         // Glue arrays, if needed
-        if (empty($per_file_values)):
-            return array();
+        if ($per_file_values === []):
+            return [];
         endif;
 
         $result = ($this->getMerger())( ...$per_file_values );
@@ -130,9 +123,9 @@ class YamlConfigReader implements ConfigReaderInterface
 
     protected function removeIgnoreKey( $key, $result)
     {
-        if (!$key
-        or !array_key_exists($key, $result))
+        if (!$key || !array_key_exists($key, $result)) {
             return $result;
+        }
 
         $to_delete = (array) $result[ $key ];
         $to_delete[] = $key;
@@ -148,16 +141,12 @@ class YamlConfigReader implements ConfigReaderInterface
     public function prepareFiles( $files )
     {
         // Append "base" configs dir where the files can be found
-        $files = array_map(function( $file ) {
-            return $this->base_dir // if basedir not empty ...
-            ? join(DIRECTORY_SEPARATOR, [ $this->base_dir, $file])
-            : $file;
-        }, $files);
+        $files = array_map(fn($file) => $this->base_dir // if basedir not empty ...
+        ? implode(DIRECTORY_SEPARATOR, [ $this->base_dir, $file])
+        : $file, $files);
 
         // Disclose those that are not readable
-        return array_filter( $files, function( $file ) {
-            return is_readable($file);
-        });
+        return array_filter( $files, fn($file) => is_readable($file));
     }
 
 }

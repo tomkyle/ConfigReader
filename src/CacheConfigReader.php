@@ -7,8 +7,6 @@ use Psr\Log\NullLogger;
 use Psr\Log\LogLevel;
 use Psr\Log\LoggerAwareTrait;
 
-use Germania\Cache\CacheCallable;
-
 class CacheConfigReader implements ConfigReaderInterface
 {
     use LoggerAwareTrait;
@@ -29,44 +27,54 @@ class CacheConfigReader implements ConfigReaderInterface
     public $reader;
 
     /**
-     * @var CacheCallable
-     */
-    public $cache_callable;
-
-
-    /**
      * PSR-3 Loglevel name
      * @var string
      */
-    public $loglevel_success =LogLevel::INFO;
+    public $loglevel_success = LogLevel::INFO;
 
-
-    public function __construct( ConfigReaderInterface $reader, CacheItemPoolInterface $cache, int $lifetime, ?LoggerInterface $logger = null, ?string $loglevel_success = null)
+    public function __construct(ConfigReaderInterface $configReader, CacheItemPoolInterface $cacheItemPool, int $lifetime, ?LoggerInterface $logger = null, ?string $loglevel_success = null)
     {
-        $this->reader = $reader;
-        $this->cache_itempool = $cache;
+        $this->reader = $configReader;
+        $this->cache_itempool = $cacheItemPool;
         $this->cache_lifetime = $lifetime;
         $this->logger = $logger ?: new NullLogger;
-        $this->loglevel_success  = $loglevel_success ? $loglevel_success : $this->loglevel_success;
-
-        $this->cache_callable = new CacheCallable($this->cache_itempool, $this->cache_lifetime, function() {}, $this->logger, $this->loglevel_success);
+        $this->loglevel_success = $loglevel_success ?: $this->loglevel_success;
     }
-
 
     /**
      * @param  string[] $files Config files
      * @return mixed
      */
-    public function __invoke( ...$files )
+    public function __invoke(...$files)
     {
+        // If cache lifetime is 0, bypass cache entirely
+        if ($this->cache_lifetime === 0) {
+            return ($this->reader)(...$files);
+        }
+
         // Make Cache Key
-        $files_concat = join(",", $files);
-        $cache_key = sha1($files_concat);
+        $files_concat = implode(",", $files);
+        $cache_key = md5($files_concat);
 
-        // Utilize CacheCallable with custom creator function
-        return ($this->cache_callable)($cache_key, function( $cache_key ) use ($files) {
-            return ($this->reader)(... $files);
-        });
+        // Get cache item
+        $cacheItem = $this->cache_itempool->getItem($cache_key);
 
+        // Check if cache hit
+        if ($cacheItem->isHit()) {
+            $this->logger->log($this->loglevel_success, 'Cache hit for key: ' . $cache_key);
+            return $cacheItem->get();
+        }
+
+        // Cache miss - execute the reader
+        $this->logger->log($this->loglevel_success, 'Cache miss for key: ' . $cache_key);
+        $result = ($this->reader)(...$files);
+
+        // Store in cache
+        $cacheItem->set($result);
+        $cacheItem->expiresAfter($this->cache_lifetime);
+
+        $this->cache_itempool->save($cacheItem);
+
+        return $result;
     }
 }

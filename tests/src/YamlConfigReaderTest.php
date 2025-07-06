@@ -5,48 +5,47 @@ use Germania\ConfigReader\YamlConfigReader;
 use Germania\ConfigReader\ParseException;
 use Germania\ConfigReader\ConfigReaderExceptionInterface;
 use Symfony\Component\Yaml\Yaml;
-use Prophecy\PhpUnit\ProphecyTrait;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
+class YamlConfigReaderTest extends TestCase
 {
-    use ProphecyTrait;
 
     public $basedir;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         parent::setUp();
-        $this->basedir = join(DIRECTORY_SEPARATOR, [ dirname(__DIR__), "mocks"]);
+        $this->basedir = implode(DIRECTORY_SEPARATOR, [ dirname(__DIR__), "mocks"]);
     }
 
 
     public function testInstantiationWithoutCtorArgument( )
     {
-        $sut = new YamlConfigReader;
+        $yamlConfigReader = new YamlConfigReader;
 
         $no_file = $this->createFilenameThatNotExists();
 
-        $result = $sut( $no_file );
+        $result = $yamlConfigReader( $no_file );
         $this->assertIsArray( $result);
     }
 
 
-    /**
-     * @dataProvider provideIgnoreKeys
-     */
+    #[DataProvider('provideIgnoreKeys')]
     public function testIgnoreKey( $ignore_key, $excluded_keys)
     {
-        $sut = new YamlConfigReader( $this->basedir );
+        $yamlConfigReader = new YamlConfigReader( $this->basedir );
 
-        $result1 = $sut( "ignore.yaml" );
+        $result1 = $yamlConfigReader( "ignore.yaml" );
         $this->assertArrayHasKey($ignore_key, $result1);
 
         // set ignore key
-        $sut->setIgnoreKey( $ignore_key );
-        $result2 = $sut( "ignore.yaml" );
-        foreach($excluded_keys as $ik):
-            $this->assertFalse( array_key_exists($ik, $result2));
+        $yamlConfigReader->setIgnoreKey( $ignore_key );
+        $result2 = $yamlConfigReader( "ignore.yaml" );
+        foreach($excluded_keys as $excluded_key):
+            $this->assertFalse( array_key_exists($excluded_key, $result2));
         endforeach;
+
         $this->assertFalse( array_key_exists($ignore_key, $result2));
     }
 
@@ -54,8 +53,8 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     public static function provideIgnoreKeys()
     {
         return [
-            [ "_ignore", array( "foo" ) ],
-            [ "_ignoreMultipleKeys", array( "foo", "qux" ) ]
+            [ "_ignore", [ "foo" ] ],
+            [ "_ignoreMultipleKeys", [ "foo", "qux" ] ]
         ];
     }
 
@@ -63,11 +62,11 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 
     public function testYamlParsingOptions( )
     {
-        $sut = new YamlConfigReader( $this->basedir );
+        $yamlConfigReader = new YamlConfigReader( $this->basedir );
 
-        if (defined('\Symfony\Component\Yaml\Yaml::PARSE_DATETIME')):
-            $sut->setYamlFlags( Yaml::PARSE_DATETIME );
-            $result = $sut( "options.yaml" );
+        if (defined(\Symfony\Component\Yaml\Yaml::class . '::PARSE_DATETIME')):
+            $yamlConfigReader->setYamlFlags( Yaml::PARSE_DATETIME );
+            $result = $yamlConfigReader( "options.yaml" );
 
             // Assumptions
             $this->assertInstanceOf ( \DateTimeInterface::class,   $result['foo']);
@@ -80,8 +79,8 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 
     public function testInstantiationAndOnlyOneFile( )
     {
-        $sut = new YamlConfigReader( $this->basedir );
-        $result = $sut( "config_base.yaml" );
+        $yamlConfigReader = new YamlConfigReader( $this->basedir );
+        $result = $yamlConfigReader( "config_base.yaml" );
 
         // Assumptions
         $this->assertIsArray( $result);
@@ -93,9 +92,9 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
 
     public function testInstantiationAndOverddingFiles( )
     {
-        $sut = new YamlConfigReader( $this->basedir );
+        $yamlConfigReader = new YamlConfigReader( $this->basedir );
 
-        $result = $sut( "config_base.yaml", "config_override.yaml" );
+        $result = $yamlConfigReader( "config_base.yaml", "config_override.yaml" );
 
         // Assumptions
         $this->assertIsArray( $result);
@@ -110,19 +109,17 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("mockingbird",   $result['another_string']);
 
         $this->assertEquals(3, count($result['assoc_array']));
-        $raw_override = $sut(  "config_override.yaml" );
+        $raw_override = $yamlConfigReader(  "config_override.yaml" );
         $this->assertEquals($result['assoc_array']['foo'], $raw_override['assoc_array']['foo']);
     }
 
 
     public function testOverridingMerging( )
     {
-        $sut = new YamlConfigReader( $this->basedir );
-        $sut->setMerger( function (... $configs ) {
-            return array('numberOfConfigs' => count($configs));
-        });
+        $yamlConfigReader = new YamlConfigReader( $this->basedir );
+        $yamlConfigReader->setMerger( fn(... $configs) => ['numberOfConfigs' => count($configs)]);
 
-        $result = $sut( "config_base.yaml", "config_override.yaml" );
+        $result = $yamlConfigReader( "config_base.yaml", "config_override.yaml" );
 
         // Assumptions
         $this->assertIsArray( $result);
