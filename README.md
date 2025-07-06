@@ -8,7 +8,7 @@
 
 ## Installation
 
-**This package is version v3.3 and requires PHP 8.1+** For older PHP versions 7.1 to 8.0, head over to [GermaniaKG/ConfigReader](https://github.com/GermaniaKG/ConfigReader) or [germania-kg/configreader](https://packagist.org/packages/germania-kg/configreader) on Packagist to install package version up to version 3.2. 
+**This package is version v3.5 and requires PHP 8.3+** For older PHP versions 7.1 to 8.0, head over to [GermaniaKG/ConfigReader](https://github.com/GermaniaKG/ConfigReader) or [germania-kg/configreader](https://packagist.org/packages/germania-kg/configreader) on Packagist to install package version up to version 3.2. 
 
 
 ```bash
