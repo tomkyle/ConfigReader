@@ -7,12 +7,11 @@ use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
+class CacheConfigReaderTest extends TestCase
 {
-    use ProphecyTrait;
 
     public $logger;
 
@@ -26,11 +25,8 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
 
     public function testInstantiation( )
     {
-        $reader_mock = $this->prophesize( ConfigReaderInterface::class );
-        $reader = $reader_mock->reveal();
-
-        $cache_itempool_mock = $this->prophesize( CacheItemPoolInterface::class );
-        $cache_itempool = $cache_itempool_mock->reveal();
+        $reader = $this->createMock(ConfigReaderInterface::class);
+        $cache_itempool = $this->createMock(CacheItemPoolInterface::class);
 
         $sut = new CacheConfigReader($reader, $cache_itempool, 10, $this->logger );
         $this->assertInstanceOf( ConfigReaderInterface::class, $sut);
@@ -39,12 +35,12 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
 
     public function testWithEmptyCacheLifetime()
     {
-        $reader_mock = $this->prophesize( ConfigReaderInterface::class );
-        $reader_mock->__invoke(Argument::any())->shouldBeCalled();
-        $reader = $reader_mock->reveal();
+        $reader = $this->createMock(ConfigReaderInterface::class);
+        $reader->expects($this->once())
+               ->method('__invoke')
+               ->with($this->anything());
 
-        $cache_itempool_mock = $this->prophesize( CacheItemPoolInterface::class );
-        $cache_itempool = $cache_itempool_mock->reveal();
+        $cache_itempool = $this->createMock(CacheItemPoolInterface::class);
 
         $cache_lifetime = 0;
 
@@ -53,47 +49,56 @@ class CacheConfigReaderTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    /**
-     * @dataProvider provideCacheKey
-     */
+    #[DataProvider('provideCacheKey')]
     public function testNormal($key, $expected_result, $is_cache_hit, $cache_lifetime)
     {
-        $reader_mock = $this->prophesize( ConfigReaderInterface::class );
+        $reader = $this->createMock(ConfigReaderInterface::class);
 
-        if (!$is_cache_hit) {
-            $reader_mock->__invoke($key)->shouldBeCalled();
+        // When cache lifetime is 0, cache is disabled and reader is always called
+        if (!$is_cache_hit || $cache_lifetime === 0) {
+            $reader->expects($this->once())
+                   ->method('__invoke')
+                   ->with($key)
+                   ->willReturn($expected_result);
+        } else {
+            $reader->expects($this->never())
+                   ->method('__invoke');
         }
-        $reader_mock->__invoke($key)->wilLReturn($expected_result);
-        $reader = $reader_mock->reveal();
-
 
         // Prepare CacheItem
-        $cache_item_mock = $this->prophesize( CacheItemInterface::class );
-        $cache_item_mock->isHit()->willReturn( $is_cache_hit );
-        $cache_item_mock->get()->willReturn( $expected_result );
+        $cache_item = $this->createMock(CacheItemInterface::class);
+        $cache_item->method('isHit')
+                   ->willReturn($is_cache_hit);
+        $cache_item->method('get')
+                   ->willReturn($expected_result);
 
         if (!$is_cache_hit) {
-            $cache_item_mock->set(Argument::type("string"))->willReturn($cache_item_mock);
-            $cache_item_mock->expiresAfter($cache_lifetime)->willReturn($cache_item_mock);
+            $cache_item->expects($this->once())
+                       ->method('set')
+                       ->with($this->isType('string'))
+                       ->willReturnSelf();
+            $cache_item->expects($this->once())
+                       ->method('expiresAfter')
+                       ->with($cache_lifetime)
+                       ->willReturnSelf();
         }
-        $cache_item = $cache_item_mock->reveal();
-
 
         // Prepare CacheItemPool
-        $cache_itempool_mock = $this->prophesize( CacheItemPoolInterface::class );
-        $cache_itempool_mock->getItem(Argument::type("string"))->willReturn($cache_item);
+        $cache_itempool = $this->createMock(CacheItemPoolInterface::class);
+        $cache_itempool->method('getItem')
+                       ->with($this->isType('string'))
+                       ->willReturn($cache_item);
 
         if (!$is_cache_hit) {
-            $cache_itempool_mock->save(Argument::any())->shouldBeCalled();
+            $cache_itempool->expects($this->once())
+                           ->method('save')
+                           ->with($cache_item);
         }
-
-        $cache_itempool = $cache_itempool_mock->reveal();
-
 
         $sut = new CacheConfigReader($reader, $cache_itempool, $cache_lifetime, $this->logger );
         $result = $sut( $key );
 
-        $this->assertEquals($result, $expected_result);
+        $this->assertEquals($expected_result, $result);
     }
 
     public static function provideCacheKey()

@@ -5,11 +5,11 @@ use Germania\ConfigReader\YamlConfigReader;
 use Germania\ConfigReader\ParseException;
 use Germania\ConfigReader\ConfigReaderExceptionInterface;
 use Symfony\Component\Yaml\Yaml;
-use Prophecy\PhpUnit\ProphecyTrait;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
+class YamlConfigReaderTest extends TestCase
 {
-    use ProphecyTrait;
 
     public $basedir;
 
@@ -31,9 +31,7 @@ class YamlConfigReaderTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    /**
-     * @dataProvider provideIgnoreKeys
-     */
+    #[DataProvider('provideIgnoreKeys')]
     public function testIgnoreKey( $ignore_key, $excluded_keys)
     {
         $sut = new YamlConfigReader( $this->basedir );
